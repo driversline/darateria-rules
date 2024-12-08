@@ -3,38 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пример Telegram Mini App</title>
+    <title>Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
             text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-        button {
+        .tab {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .tab button {
             padding: 10px 20px;
-            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
             cursor: pointer;
+        }
+        .tab button:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            display: none;
+            margin-top: 20px;
+        }
+        .active {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <h1>Добро пожаловать в Telegram Mini App!</h1>
-    <p>Нажмите кнопку ниже, чтобы получить информацию о пользователе.</p>
-    <button id="getUserInfo">Получить информацию о пользователе</button>
-    <div id="userInfo" style="margin-top: 20px;"></div>
+    <div class="container">
+        <h1>Добро пожаловать в Mini App</h1>
+        <div class="tab">
+            <button onclick="showSection('rules')">Правила</button>
+            <button onclick="showSection('info')">Информация</button>
+            <button onclick="showSection('feedback')">Обратная связь</button>
+        </div>
+        
+        <div id="rules" class="content active">
+            <h2>Правила</h2>
+            <p>1. Соблюдайте уважение к другим участникам.</p>
+            <p>2. Запрещено размещение спама и рекламы.</p>
+            <p>3. Следуйте указаниям администраторов.</p>
+        </div>
+        
+        <div id="info" class="content">
+            <h2>Информация</h2>
+            <p>Это мини-приложение создано для демонстрации возможностей Telegram Mini Apps.</p>
+            <p>Вы можете использовать его для различных целей, включая игры, опросы и многое другое.</p>
+        </div>
+        
+        <div id="feedback" class="content">
+            <h2>Обратная связь</h2>
+            <p>Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами через Telegram.</p>
+        </div>
+    </div>
 
     <script>
-        document.getElementById('getUserInfo').onclick = function() {
-            const user = window.Telegram.WebApp.initDataUnsafe.user;
-            const userInfoDiv = document.getElementById('userInfo');
-            userInfoDiv.innerHTML = `
-                <h2>Информация о пользователе:</h2>
-                <p>Имя: ${user.first_name}</p>
-                <p>Фамилия: ${user.last_name || 'Не указана'}</p>
-                <p>Юзернейм: ${user.username || 'Не указан'}</p>
-            `;
-        };
+        function showSection(section) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(section).classList.add('active');
+        }
     </script>
 </body>
 </html>
