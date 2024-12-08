@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать в Telegram Mini App!</h1>
+    <p>Нажмите кнопку ниже, чтобы получить информацию о пользователе.</p>
+    <button id="getUserInfo">Получить информацию о пользователе</button>
+    <div id="userInfo" style="margin-top: 20px;"></div>
+
+    <script>
+        document.getElementById('getUserInfo').onclick = function() {
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
+            const userInfoDiv = document.getElementById('userInfo');
+            userInfoDiv.innerHTML = `
+                <h2>Информация о пользователе:</h2>
+                <p>Имя: ${user.first_name}</p>
+                <p>Фамилия: ${user.last_name || 'Не указана'}</p>
+                <p>Юзернейм: ${user.username || 'Не указан'}</p>
+            `;
+        };
+    </script>
+</body>
+</html>
