@@ -37,8 +37,8 @@
         font-size: 16px;
     }
     .content {
-        max-height: 200px; /* Установите желаемую высоту */
-        overflow-y: auto; /* Добавьте вертикальную прокрутку */
+        max-height: 0; /* Изначально скрыто */
+        overflow: hidden; /* Скрыть переполнение */
         transition: max-height 0.3s ease-out, padding 0.3s ease-out;
         padding: 0 10px;
         border: 1px solid #ddd;
@@ -46,7 +46,7 @@
         margin-bottom: 10px;
     }
     .active {
-        max-height: 500px; /* Достаточно большое значение для контента */
+        max-height: 1000px; /* Достаточно большое значение для полного контента */
         padding: 10px;
     }
 
@@ -61,6 +61,7 @@
         }
     }
 </style>
+
 
 </head>
 <body>
@@ -103,16 +104,17 @@
     </div>
 
     <script>
-        function toggleContent(section) {
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => {
-                if (content.id === section) {
-                    content.classList.toggle('active');
-                } else {
-                    content.classList.remove('active');
-                }
-            });
-        }
-    </script>
+    function toggleContent(section) {
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => {
+            if (content.id === section) {
+                content.classList.toggle('active');
+            } else {
+                content.classList.remove('active');
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
